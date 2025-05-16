@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.setAttribute('data-id', task.id);
             li.classList.add(`status-${task.status}`); 
 
-            // Map status value to display text
+            
             let statusText = 'Unknown';
             if (task.status === 'not-done') statusText = 'Not Done';
             else if (task.status === 'in-processing') statusText = 'In Processing';
@@ -58,27 +58,27 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             taskList.appendChild(li);
         });
-        saveTasks(); // Save state after rendering
+        saveTasks(); 
     };
 
-    // Function to safely escape HTML content
+    
     const escapeHTML = (str) => {
         const div = document.createElement('div');
         div.appendChild(document.createTextNode(str));
         return div.innerHTML;
     };
 
-    // Function to open a modal
+    
     const openModal = (modal) => {
         modal.style.display = 'flex';
     };
 
-    // Function to close a modal
+    
     const closeModal = (modal) => {
         modal.style.display = 'none';
     };
 
-    // Function to handle adding a new task
+    
     const addTask = () => {
         const text = newTaskInput.value.trim();
         const status = newTaskStatus.value;
@@ -89,19 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const newTask = {
-            id: Date.now().toString(), // Simple unique ID using timestamp
+            id: Date.now().toString(), 
             text: text,
-            status: status // 'not-done', 'in-processing', 'completed'
+            status: status 
         };
 
         tasks.push(newTask);
-        newTaskInput.value = ''; // Clear input
-        newTaskStatus.value = 'not-done'; // Reset status dropdown
+        newTaskInput.value = ''; 
+        newTaskStatus.value = 'not-done'; 
         closeModal(addTaskModal);
         renderTasks();
     };
 
-    // Function to handle deleting a task
+    
     const deleteTask = (id) => {
         if (confirm('Are you sure you want to delete this task?')) {
             tasks = tasks.filter(task => task.id !== id);
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Function to populate and open the edit modal
+    
     const openEditModal = (id) => {
         const taskToEdit = tasks.find(task => task.id === id);
         if (!taskToEdit) return;
@@ -117,29 +117,29 @@ document.addEventListener('DOMContentLoaded', () => {
         editTaskIdInput.value = taskToEdit.id;
         editTaskInput.value = taskToEdit.text;
 
-        // Define allowed status options based on current status
+        
         const statusOptions = [
             { value: 'not-done', text: 'Not Done' },
             { value: 'in-processing', text: 'In Processing' },
             { value: 'completed', text: 'Completed' }
         ];
 
-        // Filter options based on current status
+        
         let allowedOptions;
         if (taskToEdit.status === 'not-done') {
-            allowedOptions = statusOptions; // Can select any status
+            allowedOptions = statusOptions; 
         } else if (taskToEdit.status === 'in-processing') {
             allowedOptions = statusOptions.filter(option => 
                 option.value === 'in-processing' || option.value === 'completed'
-            ); // Cannot revert to 'not-done'
+            ); 
         } else if (taskToEdit.status === 'completed') {
             allowedOptions = statusOptions.filter(option => 
                 option.value === 'completed'
-            ); // Cannot revert to 'not-done' or 'in-processing'
+            ); 
         }
 
-        // Populate the status dropdown
-        editTaskStatus.innerHTML = ''; // Clear existing options
+        
+        editTaskStatus.innerHTML = '';
         allowedOptions.forEach(option => {
             const opt = document.createElement('option');
             opt.value = option.value;
@@ -147,13 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
             editTaskStatus.appendChild(opt);
         });
 
-        // Set the current status
+        
         editTaskStatus.value = taskToEdit.status;
 
         openModal(editTaskModal);
     };
 
-    // Function to save edited task
+    
     const saveEditedTask = () => {
         const id = editTaskIdInput.value;
         const newText = editTaskInput.value.trim();
@@ -175,25 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks();
     };
 
-    // --- Event Listeners ---
-
-    // Open Add Task Modal
     addTaskBtn.addEventListener('click', () => {
         openModal(addTaskModal);
-        newTaskInput.focus(); // Focus the input field when modal opens
+        newTaskInput.focus(); 
     });
 
-    // Close Add Task Modal (Close Button)
     closeAddModalBtn.addEventListener('click', () => closeModal(addTaskModal));
-    // Close Add Task Modal (Cancel Button)
     cancelAddModalBtn.addEventListener('click', () => closeModal(addTaskModal));
 
-    // Close Edit Task Modal (Close Button)
     closeEditModalBtn.addEventListener('click', () => closeModal(editTaskModal));
-    // Close Edit Task Modal (Cancel Button)
+
     cancelEditModalBtn.addEventListener('click', () => closeModal(editTaskModal));
 
-    // Close modal if clicking outside the content area
+
     window.addEventListener('click', (event) => {
         if (event.target === addTaskModal) {
             closeModal(addTaskModal);
@@ -203,29 +197,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Save New Task
     saveNewTaskBtn.addEventListener('click', addTask);
-    // Allow saving new task with Enter key in the input field
+
     newTaskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             addTask();
         }
     });
 
-    // Save Edited Task
+
     saveEditTaskBtn.addEventListener('click', saveEditedTask);
-    // Allow saving edited task with Enter key in the input field
+
     editTaskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             saveEditedTask();
         }
     });
 
-    // Handle clicks within the task list (for Edit/Delete buttons - Event Delegation)
     taskList.addEventListener('click', (event) => {
         const target = event.target;
-        const li = target.closest('li'); // Find the parent list item
-        if (!li) return; // Exit if the click wasn't inside a list item
+        const li = target.closest('li'); 
+        if (!li) return; 
 
         const taskId = li.getAttribute('data-id');
 
@@ -236,6 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Initial Render ---
     renderTasks();
 });

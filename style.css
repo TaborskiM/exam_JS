@@ -1,4 +1,3 @@
-/* General Styling */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f8fafc;
@@ -26,14 +25,13 @@ h1 {
     letter-spacing: -0.025em;
 }
 
-/* Button Wrapper */
+
 .button-wrapper {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 24px;
 }
 
-/* Buttons General */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -110,7 +108,7 @@ h1 {
     transform: translateY(-1px);
 }
 
-/* Task List */
+
 #taskList {
     list-style: none;
     padding: 0;
@@ -158,7 +156,7 @@ h1 {
     display: inline-block;
 }
 
-/* Status Specific Styles */
+
 #taskList li.status-not-done {
     border-left-color: #ef4444;
 }
@@ -189,7 +187,7 @@ h1 {
     margin-left: 8px;
 }
 
-/* Modal (Floating Window) Styles */
+
 .modal {
     display: none;
     position: fixed;
