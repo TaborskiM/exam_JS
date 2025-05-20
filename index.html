@@ -15,8 +15,8 @@
         <ul id="taskList"></ul>
     </div>
 
-    <div id="addTaskModal" class="modal">
-        <div class="modal-content">
+    <div id="addTaskpanel" class="panel">
+        <div class="panel-content">
             <span class="close-btn">&times;</span>
             <h2>Add New Task</h2>
             <label for="newTaskInput">Task:</label>
@@ -27,15 +27,15 @@
                 <option value="in-processing">In Processing</option>
                 <option value="completed">Completed</option>
             </select>
-            <div class="modal-buttons">
+            <div class="panel-buttons">
                 <button id="saveNewTaskBtn" class="btn save-btn">Save Task</button>
                 <button class="btn cancel-btn">Cancel</button>
             </div>
         </div>
     </div>
 
-    <div id="editTaskModal" class="modal">
-        <div class="modal-content">
+    <div id="editTaskpanel" class="panel">
+        <div class="panel-content">
             <span class="close-btn">&times;</span>
             <h2>Edit Task</h2>
             <input type="hidden" id="editTaskId">
@@ -47,7 +47,7 @@
                 <option value="in-processing">In Processing</option>
                 <option value="completed">Completed</option>
             </select>
-            <div class="modal-buttons">
+            <div class="panel-buttons">
                 <button id="saveEditTaskBtn" class="btn save-btn">Save Changes</button>
                 <button class="btn cancel-btn">Cancel</button>
             </div>

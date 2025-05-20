@@ -188,7 +188,7 @@ h1 {
 }
 
 
-.modal {
+.panel {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -208,7 +208,7 @@ h1 {
     to { opacity: 1; }
 }
 
-.modal-content {
+.panel-content {
     background: #ffffff;
     margin: auto;
     padding: 32px;
@@ -226,7 +226,7 @@ h1 {
     to { transform: translateY(0); opacity: 1; }
 }
 
-.modal-content h2 {
+.panel-content h2 {
     margin-top: 0;
     color: #1e293b;
     font-size: 1.75rem;
@@ -234,8 +234,8 @@ h1 {
     margin-bottom: 24px;
 }
 
-.modal-content input[type="text"],
-.modal-content select {
+.panel-content input[type="text"],
+.panel-content select {
     width: 100%;
     padding: 12px;
     margin-bottom: 16px;
@@ -246,21 +246,21 @@ h1 {
     transition: border-color 0.2s ease;
 }
 
-.modal-content input[type="text"]:focus,
-.modal-content select:focus {
+.panel-content input[type="text"]:focus,
+.panel-content select:focus {
     border-color: #3b82f6;
     outline: none;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.modal-content label {
+.panel-content label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
     color: #1e293b;
 }
 
-.modal-buttons {
+.panel-buttons {
     text-align: right;
     margin-top: 24px;
 }

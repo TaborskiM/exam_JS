@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskList = document.getElementById('taskList');
 
     
-    const addTaskModal = document.getElementById('addTaskModal');
-    const closeAddModalBtn = addTaskModal.querySelector('.close-btn');
-    const cancelAddModalBtn = addTaskModal.querySelector('.cancel-btn');
+    const addTaskpanel = document.getElementById('addTaskpanel');
+    const closeAddpanelBtn = addTaskpanel.querySelector('.close-btn');
+    const cancelAddpanelBtn = addTaskpanel.querySelector('.cancel-btn');
     const saveNewTaskBtn = document.getElementById('saveNewTaskBtn');
     const newTaskInput = document.getElementById('newTaskInput');
     const newTaskStatus = document.getElementById('newTaskStatus');
 
     
-    const editTaskModal = document.getElementById('editTaskModal');
-    const closeEditModalBtn = editTaskModal.querySelector('.close-btn');
-    const cancelEditModalBtn = editTaskModal.querySelector('.cancel-btn');
+    const editTaskpanel = document.getElementById('editTaskpanel');
+    const closeEditpanelBtn = editTaskpanel.querySelector('.close-btn');
+    const cancelEditpanelBtn = editTaskpanel.querySelector('.cancel-btn');
     const saveEditTaskBtn = document.getElementById('saveEditTaskBtn');
     const editTaskInput = document.getElementById('editTaskInput');
     const editTaskStatus = document.getElementById('editTaskStatus');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    const renderTasks = () => {
+    const DisplayTasks = () => {
         taskList.innerHTML = ''; 
         if (tasks.length === 0) {
             taskList.innerHTML = '<p style="text-align:center; color: #777;">No tasks yet!</p>';
@@ -69,13 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     
-    const openModal = (modal) => {
-        modal.style.display = 'flex';
+    const openpanel = (panel) => {
+        panel.style.display = 'flex';
     };
 
     
-    const closeModal = (modal) => {
-        modal.style.display = 'none';
+    const closepanel = (panel) => {
+        panel.style.display = 'none';
     };
 
     
@@ -97,20 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.push(newTask);
         newTaskInput.value = ''; 
         newTaskStatus.value = 'not-done'; 
-        closeModal(addTaskModal);
-        renderTasks();
+        closepanel(addTaskpanel);
+        DisplayTasks();
     };
 
     
     const deleteTask = (id) => {
         if (confirm('Are you sure you want to delete this task?')) {
             tasks = tasks.filter(task => task.id !== id);
-            renderTasks();
+            DisplayTasks();
         }
     };
 
     
-    const openEditModal = (id) => {
+    const openEditpanel = (id) => {
         const taskToEdit = tasks.find(task => task.id === id);
         if (!taskToEdit) return;
 
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         editTaskStatus.value = taskToEdit.status;
 
-        openModal(editTaskModal);
+        openpanel(editTaskpanel);
     };
 
     
@@ -171,29 +171,29 @@ document.addEventListener('DOMContentLoaded', () => {
             return task;
         });
 
-        closeModal(editTaskModal);
-        renderTasks();
+        closepanel(editTaskpanel);
+        DisplayTasks();
     };
 
     addTaskBtn.addEventListener('click', () => {
-        openModal(addTaskModal);
+        openpanel(addTaskpanel);
         newTaskInput.focus(); 
     });
 
-    closeAddModalBtn.addEventListener('click', () => closeModal(addTaskModal));
-    cancelAddModalBtn.addEventListener('click', () => closeModal(addTaskModal));
+    closeAddpanelBtn.addEventListener('click', () => closepanel(addTaskpanel));
+    cancelAddpanelBtn.addEventListener('click', () => closepanel(addTaskpanel));
 
-    closeEditModalBtn.addEventListener('click', () => closeModal(editTaskModal));
+    closeEditpanelBtn.addEventListener('click', () => closepanel(editTaskpanel));
 
-    cancelEditModalBtn.addEventListener('click', () => closeModal(editTaskModal));
+    cancelEditpanelBtn.addEventListener('click', () => closepanel(editTaskpanel));
 
 
     window.addEventListener('click', (event) => {
-        if (event.target === addTaskModal) {
-            closeModal(addTaskModal);
+        if (event.target === addTaskpanel) {
+            closepanel(addTaskpanel);
         }
-        if (event.target === editTaskModal) {
-            closeModal(editTaskModal);
+        if (event.target === editTaskpanel) {
+            closepanel(editTaskpanel);
         }
     });
 
@@ -224,9 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('delete-btn')) {
             deleteTask(taskId);
         } else if (target.classList.contains('edit-btn')) {
-            openEditModal(taskId);
+            openEditpanel(taskId);
         }
     });
 
-    renderTasks();
+    DisplayTasks();
 });
