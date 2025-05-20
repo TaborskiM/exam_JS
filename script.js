@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    // récupère le bouton "ADD NEW TASK"
     const addTaskBtn = document.getElementById('addTaskBtn');
+    // récupère la liste des tâches
     const taskList = document.getElementById('taskList');
 
-    
     const addTaskpanel = document.getElementById('addTaskpanel');
     const closeAddpanelBtn = addTaskpanel.querySelector('.close-btn');
     const cancelAddpanelBtn = addTaskpanel.querySelector('.cancel-btn');
@@ -18,19 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveEditTaskBtn = document.getElementById('saveEditTaskBtn');
     const editTaskInput = document.getElementById('editTaskInput');
     const editTaskStatus = document.getElementById('editTaskStatus');
-    const editTaskIdInput = document.getElementById('editTaskId'); // Hidden input
+    const editTaskIdInput = document.getElementById('editTaskId'); 
 
-
+    // récupérer les tâches depuis le localStorage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
+    // sauvegarder les tâches dans le localStorage 
     const saveTasks = () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
-
+    // Fonction pour afficher toutes les tâches 
     const DisplayTasks = () => {
         taskList.innerHTML = ''; 
+        // Si le tableau "tasks" est vide
         if (tasks.length === 0) {
+            // affiche un message indiquant qu'il n'y a pas encore de tâches
             taskList.innerHTML = '<p style="text-align:center; color: #777;">No tasks yet!</p>';
             return;
         }
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (task.status === 'not-done') statusText = 'Not Done';
             else if (task.status === 'in-processing') statusText = 'In Processing';
             else if (task.status === 'completed') statusText = 'Completed';
-
+            // ajoute le contenu HTML dans le <li> 
             li.innerHTML = `
                 <div class="task-info">
                     <span class="task-text">${escapeHTML(task.text)}</span>
@@ -68,17 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return div.innerHTML;
     };
 
-    
+    // Fonction pour ouvrir le panel
     const openpanel = (panel) => {
         panel.style.display = 'flex';
     };
 
-    
+    // Fonction pour fermer le panel
     const closepanel = (panel) => {
         panel.style.display = 'none';
     };
 
-    
+    // Fonction pour ajouter une nouvelle tâche
     const addTask = () => {
         const text = newTaskInput.value.trim();
         const status = newTaskStatus.value;
